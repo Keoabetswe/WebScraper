@@ -1,22 +1,23 @@
 import requests 
 from bs4 import BeautifulSoup
-import csv
+# import csv
 
 # request to the page to be scrapped
-URL = "https://www.takealot.com/rubiks-3x3-cube-new-version/PLID41679453/"
+URL = "https://www.amazon.com/Winning-Moves-5027-Rubiks-Cube/dp/B004FG0ZWI/"
 headers =  { 
             "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36'}
 
 page = requests.get(URL, headers=headers)
 soup = BeautifulSoup(page.content, 'html.parser')
 
-title = soup.find(id="").get_text()
-price = soup.find(id="").get_text()
+title = soup.find(id="productTitle").get_text()
+price = soup.find(id="priceblock_ourprice")
 
-print(price.strip())
+print(title.strip())
+print(price)
 
 # write to csv
-with open('takealotscraper.csv','w') as csvfile:
-    writer = csv.writer(csvfile)
-    for item in title:
-        writer.writerow([item])
+# with open('takealotscraper.csv','w') as csvfile:
+#     writer = csv.writer(csvfile)
+#     for item in title:
+#         writer.writerow([item])
